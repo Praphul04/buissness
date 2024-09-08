@@ -42,7 +42,7 @@
   </section>
 
   <section class="submit-section text-center mb-5">
-      <button class="btn btn-primary btn-lg submit-btn">Submit Review</button>
+      <button id="submit-review" class="btn btn-primary btn-lg submit-btn">Submit Review</button>
   </section>
 
   <footer class="footer-section text-center py-5">
@@ -57,32 +57,35 @@
       </div>
   </footer>
 
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    
     document.addEventListener('DOMContentLoaded', function () {
         const stars = document.querySelectorAll('.stars input');
         const feedbackMessage = document.querySelector('.feedback-message');
         const submitBtn = document.getElementById('submit-review');
-    
-        if (stars.length > 0) {
-            stars.forEach(star => {
-                star.addEventListener('change', function () {
-                    const rating = this.value;
-                    if (feedbackMessage) { // Ensure feedbackMessage exists
-                        if (rating >= 4) {
-                            feedbackMessage.textContent = 'Thank you for your positive review!';
-                        } else {
-                            feedbackMessage.textContent = 'We want to improve!';
-                        }
-                    }
-                });
-            });
+
+        // Function to update feedback message
+        function updateFeedbackMessage(rating) {
+            if (feedbackMessage) {
+                if (rating >= 4) {
+                    feedbackMessage.textContent = 'Thank you for your positive review!';
+                } else {
+                    feedbackMessage.textContent = 'We want to improve!';
+                }
+            }
         }
-    
-        if (submitBtn) { // Ensure submitBtn exists
+
+        // Add event listeners to star inputs
+        stars.forEach(star => {
+            star.addEventListener('change', function () {
+                const rating = this.value;
+                updateFeedbackMessage(rating);
+            });
+        });
+
+        // Add event listener to submit button
+        if (submitBtn) {
             submitBtn.addEventListener('click', function () {
                 const rating = document.querySelector('input[name="rating"]:checked');
                 if (rating) {
@@ -98,7 +101,6 @@
             });
         }
     });
-    
-</script>
+  </script>
 </body>
 </html>
