@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+/>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+    <header class="header-navbar">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <div class="logo-container">
+                <a href="Review.html">
+                    <img src="company.jpg" alt="Business Logo" class="logo img-fluid">
+                </a>
+            </div>
+    
+            <div class="header-content text-center flex-grow-1 mx-3">
+                <h1 class="business-name">User Profile</h1>
+                <p class="tagline">Manage your account details</p>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="tab-container d-flex justify-content-center">
+                        <button class="tab-button active" data-text="Home" data-href="review.html">
+                            <i class="bi bi-house-door" style="font-size: 1.5rem;"></i>
+                        </button>
+    
+                        <button class="tab-button" data-text="Dashboard" data-href="dashboard.html">
+                            <i class="bi bi-speedometer2" style="font-size: 1.5rem;"></i>
+                        </button>
+    
+                        <button class="tab-button" data-text="Profile" data-href="profile.html">
+                            <i class="bi bi-person" style="font-size: 1.5rem;"></i>
+                        </button>
+    
+                        <button class="tab-button" data-text="Logout" data-href="login.html">
+                            <i class="bi bi-box-arrow-right" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile-section py-5">
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+              <div class="profile-card bg-light shadow-lg p-4 rounded-3 text-center position-relative">
+                <div class="profile-picture position-relative">
+                  <img
+                    src="default-profile-pic.jpg"
+                    alt="Profile Picture"
+                    id="profile-pic"
+                    class="rounded-circle mb-3"
+                    width="150"
+                    height="150"
+                  />
+                  <input type="file" id="upload-photo" style="display: none;" onchange="updateProfilePicture(event)" />
+                  <button
+                    class="btn btn-outline-secondary position-absolute"
+                    style="top: 100px; left: 60%; transform: translateX(-50%);"
+                    onclick="document.getElementById('upload-photo').click()"
+                  >
+                    <i class="bi bi-camera"></i>
+                  </button>
+                </div>
+      
+                <h2 id="profile-name" class="mb-1">John Doe</h2>
+                <p class="text-muted">Full Stack Developer</p>
+                <hr />
+      
+                <div class="profile-info text-start">
+                  <div class="row mb-3">
+                    <div class="col-12 col-md-6">
+                      <p>
+                        <i class="bi bi-envelope"></i> <strong>Email:</strong> <span id="profile-email">example@example.com</span>
+                      </p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <p>
+                        <i class="bi bi-phone"></i> <strong>Mobile Number:</strong> <span id="profile-phone">N/A</span>
+                      </p>
+                    </div>
+                  </div>
+      
+                  <div class="row mb-3">
+                    <div class="col-12 col-md-6">
+                      <p>
+                        <i class="bi bi-geo-alt"></i> <strong>Address:</strong> <span id="profile-address">N/A</span>
+                      </p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <p>
+                        <i class="bi bi-calendar"></i> <strong>Date of Birth:</strong> <span id="profile-dob">N/A</span>
+                      </p>
+                    </div>
+                  </div>
+      
+                  <p><i class="bi bi-gender-ambiguous"></i> <strong>Gender:</strong> <span id="profile-gender">N/A</span></p>
+                </div>
+      
+                <button class="btn btn-primary mt-3" onclick="showEditForm()">Edit Profile</button>
+      
+                <form
+                  id="edit-form"
+                  class="edit-form mt-4 bg-white shadow-sm p-3 rounded"
+                  style="display: none;"
+                  onsubmit="updateProfile(event)"
+                >
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="edit-name" class="form-label">Name:</label>
+                      <input
+                        type="text"
+                        id="edit-name"
+                        class="form-control"
+                        placeholder="Enter your name"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="edit-email" class="form-label">Email:</label>
+                      <input
+                        type="email"
+                        id="edit-email"
+                        class="form-control"
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
+                  </div>
+      
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="edit-phone" class="form-label">Mobile Number:</label>
+                      <input
+                        type="text"
+                        id="edit-phone"
+                        class="form-control"
+                        placeholder="Enter your mobile number"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="edit-address" class="form-label">Address:</label>
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          id="edit-address"
+                          class="form-control"
+                          placeholder="Enter your address"
+                          required
+                        />
+                        <button
+                          class="btn btn-outline-secondary"
+                          type="button"
+                          onclick="getCurrentLocation()"
+                        >
+                          <i class="bi bi-geo-fill"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="edit-dob" class="form-label">Date of Birth:</label>
+                      <input
+                        type="date"
+                        id="edit-dob"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="edit-gender" class="form-label">Gender:</label>
+                      <select id="edit-gender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+      
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success">Update Profile</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <footer class="footer-section text-center py-5">
+        <div class="container">
+            <p class="footer-contact">
+                For further assistance, contact us at 
+                <a href="mailto:support@business.com" class="footer-link">support@business.com</a>
+            </p>
+            <div class="social-icons my-4">
+                <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <p class="footer-policy">
+                <a href="#" class="footer-link">Terms and Conditions</a> | 
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Load profile information from localStorage on page load
+    // Load profile information from localStorage on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        loadProfile();
+      });
+    
+      function loadProfile() {
+        const profile = {
+          userName: localStorage.getItem("userName") || "John Doe",
+          userEmail: localStorage.getItem("email") || "example@example.com",
+          userPhone: localStorage.getItem("userPhone") || "N/A",
+          userAddress: localStorage.getItem("userAddress") || "N/A",
+          userDOB: localStorage.getItem("userDOB") || "N/A",
+          userGender: localStorage.getItem("userGender") || "N/A",
+          profilePic: localStorage.getItem("profilePic") || "default-profile-pic.jpg",
+        };
+    
+        // Populate the profile section
+        document.getElementById("profile-name").textContent = profile.userName;
+        document.getElementById("profile-email").textContent = profile.userEmail;
+        document.getElementById("profile-phone").textContent = profile.userPhone;
+        document.getElementById("profile-address").textContent = profile.userAddress;
+        document.getElementById("profile-dob").textContent = profile.userDOB;
+        document.getElementById("profile-gender").textContent = profile.userGender;
+        document.getElementById("profile-pic").src = profile.profilePic;
+      }
+    
+      function showEditForm() {
+        document.getElementById("edit-form").style.display = "block";
+        document.getElementById("edit-name").value = localStorage.getItem("userName") || "";
+        document.getElementById("edit-email").value = localStorage.getItem("email") || "";
+        document.getElementById("edit-phone").value = localStorage.getItem("userPhone") || "";
+        document.getElementById("edit-address").value = localStorage.getItem("userAddress") || "";
+        document.getElementById("edit-dob").value = localStorage.getItem("userDOB") || "";
+        document.getElementById("edit-gender").value = localStorage.getItem("userGender") || "Male";
+      }
+    
+      function updateProfile(event) {
+        event.preventDefault();
+    
+        const updatedProfile = {
+          userName: document.getElementById("edit-name").value,
+          userEmail: document.getElementById("edit-email").value,
+          userPhone: document.getElementById("edit-phone").value,
+          userAddress: document.getElementById("edit-address").value,
+          userDOB: document.getElementById("edit-dob").value,
+          userGender: document.getElementById("edit-gender").value,
+        };
+    
+        localStorage.setItem("userName", updatedProfile.userName);
+        localStorage.setItem("email", updatedProfile.userEmail);
+        localStorage.setItem("userPhone", updatedProfile.userPhone);
+        localStorage.setItem("userAddress", updatedProfile.userAddress);
+        localStorage.setItem("userDOB", updatedProfile.userDOB);
+        localStorage.setItem("userGender", updatedProfile.userGender);
+    
+        loadProfile();
+        alert("Profile updated successfully!");
+        document.getElementById("edit-form").style.display = "none";
+      }
+    
+      function updateProfilePicture(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function (e) {
+          const imageUrl = e.target.result;
+          document.getElementById("profile-pic").src = imageUrl;
+          localStorage.setItem("profilePic", imageUrl);
+        };
+    
+        reader.readAsDataURL(file);
+      }
+    
+      function getCurrentLocation() {
+        if (!navigator.geolocation) {
+          alert("Geolocation is not supported by your browser");
+          return;
+        }
+    
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const address = `Lat: ${latitude}, Long: ${longitude}`;
+            document.getElementById("edit-address").value = address;
+          },
+          () => {
+            alert("Unable to retrieve your location");
+          }
+        );
+      }
+    document.addEventListener("DOMContentLoaded", function() {
+        const buttons = document.querySelectorAll('.tab-button');
+        
+        // Function to set the active button
+        function setActiveButton(button) {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+    
+        // Event for clicking to set the active button and navigate
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                setActiveButton(button);
+                navigateToPage(button.getAttribute('data-href'));
+            });
+        });
+    
+        // Set the initial active button based on the current page
+        const currentPage = window.location.pathname.split('/').pop();
+        buttons.forEach(button => {
+            if (button.getAttribute('data-href') === currentPage) {
+                setActiveButton(button);
+            }
+        });
+    });
+    
+    function navigateToPage(page) {
+        window.location.href = page;
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('#navbarNav');
+        const body = document.querySelector('body');
+    
+        // Toggle the menu
+        navbarToggler.addEventListener('click', () => {
+            navbarCollapse.classList.toggle('show');
+        });
+    
+        // Close the menu when clicking outside of it
+        document.addEventListener('click', (event) => {
+            if (!navbarToggler.contains(event.target) && !navbarCollapse.contains(event.target)) {
+                navbarCollapse.classList.remove('show');
+            }
+        });
+    });
+    
+    
+    
+    
+    </script>
+</body>
+</html>
